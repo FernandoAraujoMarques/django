@@ -1,4 +1,4 @@
-name: Django CI
+name: Remote SSH
 
 on:
   push:
@@ -8,21 +8,21 @@ on:
 
   workflow_dispatch:
 
+
 jobs:
-  build:
-
+  testing01:
+    name: default flag testing
     runs-on: ubuntu-latest
-    strategy:
-      max-parallel: 4
-      matrix:
-        python-version: [3.7, 3.8, 3.9]
-
     steps:
-    - uses: actions/checkout@v3
-    - name: Set up Python ${{ matrix.python-version }}
-      uses: actions/setup-python@v3
-      with:
-        python-version: ${{ matrix.python-version }}
-    - name: Run Tests
-      run: |
-        python manage.py test
+      - name: checkout
+        uses: actions/checkout@v1
+
+      - name: correct password but wrong key
+        uses: ./
+        with:
+          host: ${{ secrets.HOST }}
+          username: ${{ secrets.USERNAME }}
+          password: ${{ secrets.PASSWORD }}
+          key: ${{ secrets.SEVER_SSH_KEY}}
+          port: ${{ secrets.PORT }}
+          script: git pull
