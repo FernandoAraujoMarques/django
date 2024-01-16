@@ -17,12 +17,11 @@ jobs:
       - name: checkout
         uses: actions/checkout@v1
 
-      - name: correct password but wrong key
+      - name: executing remote ssh commands using ssh key
         uses: ./
         with:
           host: ${{ secrets.HOST }}
           username: ${{ secrets.USERNAME }}
-          password: ${{ secrets.PASSWORD }}
-          key: ${{ secrets.SEVER_SSH_KEY}}
+          key: ${{ secrets.KEY }}
           port: ${{ secrets.PORT }}
-          script: git pull
+          script: whoami
