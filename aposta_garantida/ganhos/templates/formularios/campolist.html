@@ -100,7 +100,7 @@
                 <option value="">Todas as Datas</option>
             </select>
         </div>
-                
+
 </div>
 
 {% endblock %}
@@ -116,7 +116,7 @@
         var uniqueDates = [];
 
         // Percorre as células da coluna "Data" e extrai os valores únicos
-        $("#myTable tbody td:first-child").each(function () {
+        $("#myTable tbody td:nth-child(1)").each(function () {
             var dateValue = $(this).text();
             if (!uniqueDates.includes(dateValue)) {
                 uniqueDates.push(dateValue);
@@ -134,7 +134,7 @@
             $("#myTable tbody tr").hide();
 
             // Exibe apenas as linhas com a data selecionada
-            $("#myTable tbody td:first-child:contains('" + dataSelecionada + "')").parent().show();
+            $("#myTable tbody td:nth-child(1):contains('" + dataSelecionada + "')").parent().show();
         });
     });
 </script>
