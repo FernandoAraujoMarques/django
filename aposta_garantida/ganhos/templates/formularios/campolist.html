@@ -117,6 +117,8 @@
         // Percorre as células da coluna "Data" e extrai os valores únicos
         $("#myTable tbody td:first-child").each(function () {
             var dateValue = $(this).text();
+            console.log(dateValue);
+            
             if (!uniqueDates.includes(dateValue)) {
                 uniqueDates.push(dateValue);
             }
