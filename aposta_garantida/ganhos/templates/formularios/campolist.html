@@ -104,23 +104,23 @@
 </div>
 
 <div>
+    <label for="countriesDropdown">Filtrar por País:</label>
     <select id="countriesDropdown" onchange="filterTable()">
-        <option>All</option>
-        <option>Sweden</option>
-        <option>Germany</option>
+        <option value="All">Todos os Países</option>
+        <option value="Sweden">Suécia</option>
+        <option value="Germany">Alemanha</option>
     </select>
-
-    <table id="myTable">
-        <tr><th>Name</th><th>Country</th></tr><!-- header row uses 'th' instead of 'td' -->
-        <tr><td>Inga</td><td>Sweden</td></tr>
-        <tr><td>Helena</td><td>Sweden</td></tr>
-        <tr><td>Hans</td><td>Germany</td></tr>
-        <tr><td>Anna</td><td>Germany</td></tr>
-    </table>
 </div>
 
-{% endblock %}
+<table id="myTable">
+    <tr><th>Name</th><th>Country</th></tr>
+    <tr><td>Inga</td><td>Sweden</td></tr>
+    <tr><td>Helena</td><td>Sweden</td></tr>
+    <tr><td>Hans</td><td>Germany</td></tr>
+    <tr><td>Anna</td><td>Germany</td></tr>
+</table>
 
+{% endblock %}
 
 <script>
     function filterTable() {
@@ -132,11 +132,12 @@
         filter = dropdown.value;
 
         // Loops through rows and hides those with countries that don't match the filter
-        for (let row of rows) { // `for...of` loops through the NodeList
+        for (let i = 1; i < rows.length; i++) { // Start from index 1 to skip header row
+            let row = rows[i];
             cells = row.getElementsByTagName("td");
-            country = cells[1] || null; // gets the 2nd `td` or nothing
-            // if the filter is set to 'All', or this is the header row, or 2nd `td` text matches filter
-            if (filter === "All" || !country || (filter === country.textContent)) {
+            country = cells[1] ? cells[1].textContent : null;
+
+            if (filter === "All" || filter === country) {
                 row.style.display = ""; // shows this row
             } else {
                 row.style.display = "none"; // hides this row
