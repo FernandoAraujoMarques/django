@@ -57,14 +57,6 @@
 
 <br></br>
 
-<div>
-    <label for="dateFilter">Filter by Date:</label>
-    <select id="dateFilter" onchange="filterTableByDate()">
-        <option value="all">All Dates</option>
-        <!-- Add more options as needed -->
-    </select>
-</div>
-
 <div class=".betting-table" id="myTable">
         <table class="table">
           <tr>
@@ -140,49 +132,6 @@
     });
 </script>
 
-
-<script>
-function filterTableByDate() {
-    var selectedDate = document.getElementById("dateFilter").value;
-    var tableRows = document.getElementById("myTable").getElementsByTagName("tr");
-
-    for (var i = 1; i < tableRows.length; i++) {
-        var row = tableRows[i];
-        var dateCell = row.cells[0].innerText; // Assuming the date is in the first column
-
-        if (selectedDate === "all" || dateCell.includes(selectedDate)) {
-            row.style.display = "";
-        } else {
-            row.style.display = "none";
-        }
-    }
-}
-
-// You can also call the filterTableByDate function on page load to show all rows initially
-window.onload = function() {
-    populateDateFilterOptions();
-    filterTableByDate();
-};
-
-function populateDateFilterOptions() {
-    var dateFilterDropdown = document.getElementById("dateFilter");
-    var uniqueDates = new Set();
-
-    // Start from the second row (i=1) since the first row is the header
-    var tableRows = document.getElementById("myTable").getElementsByTagName("tr");
-    for (var i = 1; i < tableRows.length; i++) {
-        var dateCell = tableRows[i].cells[0].innerText; // Assuming the date is in the first column
-        uniqueDates.add(dateCell.trim());
-    }
-
-    uniqueDates.forEach(function (date) {
-        var option = document.createElement("option");
-        option.value = date;
-        option.textContent = date;
-        dateFilterDropdown.appendChild(option);
-    });
-}
-</script>
 
 </body>
 </html>
