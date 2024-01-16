@@ -105,10 +105,8 @@
 
 {% endblock %}
 
-
 <!-- Inclua a biblioteca jQuery -->
 <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
-
 
 <!-- Adicione este script abaixo da inclusão da biblioteca jQuery -->
 <script>
@@ -117,14 +115,16 @@
         var uniqueDates = [];
 
         // Percorre as células da coluna "Data" e extrai os valores únicos
-        $("#myTable tbody td:nth-child(1)").each(function () {
+        $("#myTable tbody td:first-child").each(function () {
             var dateValue = $(this).text();
             if (!uniqueDates.includes(dateValue)) {
                 uniqueDates.push(dateValue);
-
-                // Adiciona uma opção ao menu suspenso para cada valor único
-                $("#filtroData").append('<option value="' + dateValue + '">' + dateValue + '</option>');
             }
+        });
+
+        // Preenche as opções no menu suspenso com os valores únicos
+        $.each(uniqueDates, function (index, value) {
+            $("#filtroData").append('<option value="' + value + '">' + value + '</option>');
         });
 
         // Atualiza a tabela ao selecionar uma data
@@ -135,10 +135,19 @@
             $("#myTable tbody tr").hide();
 
             // Exibe apenas as linhas com a data selecionada
-            $("#myTable tbody td:nth-child(1):contains('" + dataSelecionada + "')").parent().show();
+            $("#myTable tbody td:first-child:contains('" + dataSelecionada + "')").parent().show();
         });
     });
 </script>
+
+<!-- Adicione este código HTML para o menu suspenso -->
+<div>
+    <label for="filtroData">Filtrar por Data:</label>
+    <select id="filtroData">
+        <option value="">Todas as Datas</option>
+    </select>
+</div>
+
 
 </body>
 </html>
