@@ -103,49 +103,7 @@
 
 </div>
 
-<div>
-    <label for="countriesDropdown">Filtrar por País:</label>
-    <select id="countriesDropdown" onchange="filterTable()">
-        <option value="All">Todos os Países</option>
-        <option value="Sweden">Suécia</option>
-        <option value="Germany">Alemanha</option>
-    </select>
-</div>
-
-<table id="myTable">
-    <tr><th>Name</th><th>Country</th></tr>
-    <tr><td>Inga</td><td>Sweden</td></tr>
-    <tr><td>Helena</td><td>Sweden</td></tr>
-    <tr><td>Hans</td><td>Germany</td></tr>
-    <tr><td>Anna</td><td>Germany</td></tr>
-</table>
-
 {% endblock %}
-
-<script>
-    function filterTable() {
-        // Variables
-        let dropdown, table, rows, cells, country, filter;
-        dropdown = document.getElementById("countriesDropdown");
-        table = document.getElementById("myTable");
-        rows = table.getElementsByTagName("tr");
-        filter = dropdown.value;
-
-        // Loops through rows and hides those with countries that don't match the filter
-        for (let i = 1; i < rows.length; i++) { // Start from index 1 to skip header row
-            let row = rows[i];
-            cells = row.getElementsByTagName("td");
-            country = cells[1] ? cells[1].textContent : null;
-
-            if (filter === "All" || filter === country) {
-                row.style.display = ""; // shows this row
-            } else {
-                row.style.display = "none"; // hides this row
-            }
-        }
-    }
-</script>
-
 
 <!-- Inclua a biblioteca jQuery -->
 <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
