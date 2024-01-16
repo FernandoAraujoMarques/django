@@ -110,12 +110,29 @@
 
 {% endblock %}
 
+<!-- Inclua a biblioteca jQuery -->
 <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
 
 <!-- Adicione este script abaixo da inclusão da biblioteca jQuery -->
 <script>
     $(document).ready(function () {
         // Inicialize o menu suspenso de datas
+        var uniqueDates = [];
+
+        // Percorre as células da coluna "Data" e extrai os valores únicos
+        $("#myTable tbody td:first-child").each(function () {
+            var dateValue = $(this).text();
+            if (!uniqueDates.includes(dateValue)) {
+                uniqueDates.push(dateValue);
+            }
+        });
+
+        // Preenche as opções no menu suspenso com os valores únicos
+        $.each(uniqueDates, function (index, value) {
+            $("#filtroData").append('<option value="' + value + '">' + value + '</option>');
+        });
+
+        // Atualiza a tabela ao selecionar uma data
         $("#filtroData").change(function () {
             var dataSelecionada = $(this).val();
 
@@ -123,14 +140,7 @@
             $("#myTable tbody tr").hide();
 
             // Exibe apenas as linhas com a data selecionada
-            $("#myTable tbody tr").each(function () {
-                var rowData = $(this).find("td:first").text(); // Obtém o valor da primeira célula (coluna de data)
-                
-                // Comparação da data
-                if (rowData === dataSelecionada || dataSelecionada === "") {
-                    $(this).show();
-                }
-            });
+            $("#myTable tbody td:first-child:contains('" + dataSelecionada + "')").parent().show();
         });
     });
 </script>
