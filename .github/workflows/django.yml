@@ -9,7 +9,7 @@ on:
 
 jobs:
   testing01:
-    name: Teste com flag padrão
+    name: Atualizando o Repositorio do Django
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
