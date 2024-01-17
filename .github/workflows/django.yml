@@ -20,17 +20,14 @@ jobs:
         with:
           ssh-private-key: ${{ secrets.SEVER_SSH_KEY }}
 
-      - name: print out example job
-        uses: appleboy/ssh-action@v0.1.10
+      - name: executing remote ssh commands using ssh key
+        uses: ./
         with:
           host: ${{ secrets.HOST }}
           username: ${{ secrets.USERNAME }}
           key: ${{ secrets.SEVER_SSH_KEY }}
           port: ${{ secrets.PORT }}
-          command_timeout: 30m
-          script: | 
-            hostname
-            echo "Nice Job!!!"
+          script: whoami
       
       - name: Git Pull via SSH
         run: |
