@@ -1,0 +1,27 @@
+name: Remote SSH
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+  workflow_dispatch:
+
+jobs:
+  testing01:
+    name: Teste com flag padrão
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Configurar SSH
+        uses: webfactory/ssh-agent@v0.5.4
+        with:
+          ssh-private-key: ${{ secrets.SEVER_SSH_KEY }}
+
+      - name: Git Pull via SSH
+        run: |
+          git pull
+        env:
+          SSH_AUTH_SOCK: ${{ steps.setup-ssh.outputs.ssh-auth-sock }}
