@@ -1,32 +1,18 @@
 name: CI
 on: [push, pull_request]
 jobs:
-  deploy:
-    name: "Deploy to staging"
+  run_example_job:
     runs-on: ubuntu-latest
-    if: github.event_name == 'push' && github.ref == 'refs/heads/master'
-    # needs: test
+    timeout-minutes: 5
     steps:
-      - name: Configure SSH
-        run: |
-          mkdir -p ~/.ssh/
-          echo "$SSH_KEY" > ~/.ssh/staging.key
-          chmod 600 ~/.ssh/staging.key
-          cat >>~/.ssh/config <<END
-          Host staging
-            HostName $SSH_HOST
-            User $SSH_USER
-            IdentityFile ~/.ssh/staging.key
-            StrictHostKeyChecking no
-          END
-        env:
-          SSH_USER: ${{ secrets.STAGING_SSH_USER }}
-          SSH_KEY: ${{ secrets.STAGING_SSH_KEY }}
-          SSH_HOST: ${{ secrets.STAGING_SSH_HOST }}
-
-      - name: Status ssh.service
-        run: ssh staging 'sudo systemctl status ssh.service'
-
-      - name: Check out the source
-        run: ssh staging 'cd my-application && git fetch && git reset --hard origin/master'
+    - name: print out example job
+      uses: appleboy/ssh-action@v0.1.10
+      with:
+        host: ${{ inputs.host }}
+        username: ${{ secrets.USERNAME }}
+        key: ${{ secrets.SEVER_SSH_KEY }}
+        port: ${{ secrets.PORT }}
+        command_timeout: 30m
+        script: | 
+          echo "Nice Job!!!"
 
