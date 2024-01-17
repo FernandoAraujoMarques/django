@@ -25,3 +25,6 @@ jobs:
           git pull origin main
         env:
           SSH_AUTH_SOCK: ${{ steps.setup-ssh.outputs.ssh-auth-sock }}
+
+      - name: HostName
+        run: hostname
