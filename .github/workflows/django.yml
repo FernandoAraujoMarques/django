@@ -2,27 +2,26 @@ name: Remote SSH
 
 on:
   push:
-    branches: [ "main,master" ]
+    branches: [ "main", "master" ]
   pull_request:
-    branches: [ "main,master" ]
-
+    branches: [ "main", "master" ]
   workflow_dispatch:
-
 
 jobs:
   testing01:
-    name: default flag testing
+    name: Teste com flag padrão
     runs-on: ubuntu-latest
     steps:
-      - name: checkout
-        uses: actions/checkout@v1
+      - name: Checkout
+        uses: actions/checkout@v2
 
-      - name: correct password but wrong key
-        uses: ./
+      - name: Configurar SSH
+        uses: webfactory/ssh-agent@v0.5.4
         with:
-          host: ${{ secrets.HOST }}
-          username: ${{ secrets.USERNAME }}
-          password: ${{ secrets.PASSWORD }}
-          key: ${{ secrets.SEVER_SSH_KEY}}
-          port: ${{ secrets.PORT }}
-          script: git pull
+          ssh-private-key: ${{ secrets.SEVER_SSH_KEY }}
+
+      - name: Git Pull via SSH
+        run: |
+          git pull
+        env:
+          SSH_AUTH_SOCK: ${{ steps.setup-ssh.outputs.ssh-auth-sock }}
