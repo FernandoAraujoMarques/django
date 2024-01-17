@@ -20,11 +20,8 @@ jobs:
         with:
           ssh-private-key: ${{ secrets.SEVER_SSH_KEY }}
 
-      - name: Path
-        run: cd "home/ubuntu/www/django/aposta_garantida/ganhos"
-
       - name: Git Pull via SSH
         run: |
-          git pull origin main
+          git pull origin main --path=home/ubuntu/www/django/aposta_garantida/ganhos
         env:
           SSH_AUTH_SOCK: ${{ steps.setup-ssh.outputs.ssh-auth-sock }}
