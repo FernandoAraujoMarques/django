@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dynamic Dropdown Menu</title>
+</head>
+<body>
+
+<script>
+    // Sample data for the dropdown options
+    var options = ["Option 1", "Option 2", "Option 3", "Option 4"];
+
+    // Create a select element
+    var select = document.createElement("select");
+
+    // Loop through the options and create option elements
+    for (var i = 0; i < options.length; i++) {
+        var option = document.createElement("option");
+        option.value = options[i];
+        option.text = options[i];
+        select.appendChild(option);
+    }
+
+    // Append the select element to the body or any other container element
+    document.body.appendChild(select);
+</script>
+
+</body>
+</html>
