@@ -94,65 +94,15 @@
 
         </table>
 
-        <div>
-            <label for="filtroData">Filtrar por Data:</label>
-            <select id="filtroData">
-                <option value="">Todas as Datas</option>
-            </select>
-        </div>
 
 </div>
 
 {% endblock %}
 
-<!-- Inclua a biblioteca jQuery -->
-<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
-
-<!-- Adicione este script abaixo da inclusão da biblioteca jQuery -->
-<script>
-    $(document).ready(function () {
-        // Inicialize o menu suspenso de datas
-        var uniqueDates = [];
-
-        // Percorre as células da coluna "Data" e extrai os valores únicos
-        $("#myTable tbody td:first-child").each(function () {
-            var dateValue = $(this).text();
-            console.log(dateValue);
-
-            if (!uniqueDates.includes(dateValue)) {
-                uniqueDates.push(dateValue);
-            }
-        });
-
-        // Preenche as opções no menu suspenso com os valores únicos
-        $.each(uniqueDates, function (index, value) {
-            $("#filtroData").append('<option value="' + value + '">' + value + '</option>');
-        });
-
-        // Atualiza a tabela ao selecionar uma data
-        $("#filtroData").change(function () {
-            var dataSelecionada = $(this).val();
-
-            // Oculta todas as linhas da tabela
-            $("#myTable tbody tr").hide();
-
-            // Exibe apenas as linhas com a data selecionada
-            $("#myTable tbody td:first-child:contains('" + dataSelecionada + "')").parent().show();
-        });
-    });
-</script>
-
-<!-- Adicione este código HTML para o menu suspenso -->
-<div>
-    <label for="filtroData">Filtrar por Data:</label>
-    <select id="filtroData">
-        <option value="">Todas as Datas</option>
-    </select>
-</div>
-
 <script>
     // Obter o elemento da tabela e do dropdown
     var tabela = document.getElementById("table");
+    console.log(tabela);
     var dropdown = document.createElement("select");
 
     // Obter todas as linhas da tabela (excluindo a linha de cabeçalho)
@@ -183,7 +133,7 @@
             var data = celulaData.textContent.trim().toLowerCase();
 
             // Definir a visibilidade da linha com base na correspondência com a opção selecionada
-            linhas[i].style.display = (data === valorSelecionado || valorSelecionado === "") ? "" : "none";
+            linhas[i].style.display = ({{ member.casa }} === valorSelecionado || valorSelecionado === "") ? "" : "none";
         }
     });
 
