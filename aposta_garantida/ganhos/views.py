@@ -6,6 +6,7 @@ from django.views.generic.list import ListView
 from django.urls import reverse_lazy
 from datetime import date
 from django.template import loader
+from django.http import HttpResponse
 
 ## Teste DropBox
 def dropbox(request):
