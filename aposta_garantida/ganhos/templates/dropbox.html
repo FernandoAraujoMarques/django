@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-br">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dynamic Dropdown Menu</title>
+    <title>Menu Dropdown Dinâmico</title>
     <style>
     table {
       font-family: arial, sans-serif;
@@ -23,73 +23,85 @@
     </style>
 </head>
 <body>
-<h2>HTML Table</h2>
+<h2>Tabela HTML</h2>
 
-<table id="companyTable">
+<table id="tabelaEmpresas">
   <tr>
-    <th>Company</th>
-    <th>Contact</th>
-    <th>Country</th>
+    <th>Empresa</th>
+    <th>Contato</th>
+    <th>País</th>
   </tr>
   <tr>
     <td>Alfreds Futterkiste</td>
     <td>Maria Anders</td>
-    <td>Germany</td>
+    <td>Alemanha</td>
   </tr>
   <tr>
     <td>Centro comercial Moctezuma</td>
     <td>Francisco Chang</td>
-    <td>Mexico</td>
+    <td>México</td>
   </tr>
   <tr>
     <td>Ernst Handel</td>
     <td>Roland Mendel</td>
-    <td>Austria</td>
+    <td>Áustria</td>
   </tr>
   <tr>
     <td>Island Trading</td>
     <td>Helen Bennett</td>
-    <td>UK</td>
+    <td>Reino Unido</td>
   </tr>
   <tr>
     <td>Laughing Bacchus Winecellars</td>
     <td>Yoshi Tannamuri</td>
-    <td>Canada</td>
+    <td>Canadá</td>
   </tr>
   <tr>
     <td>Magazzini Alimentari Riuniti</td>
     <td>Giovanni Rovelli</td>
-    <td>Italy</td>
+    <td>Itália</td>
   </tr>
 </table>
-    
+
 <script>
-    // Get the table element
-    var table = document.getElementById("companyTable");
+    // Obter o elemento da tabela e do dropdown
+    var tabela = document.getElementById("tabelaEmpresas");
+    var dropdown = document.createElement("select");
 
-    // Get all the rows in the table (excluding the header row)
-    var rows = table.getElementsByTagName("tr");
+    // Obter todas as linhas da tabela (excluindo a linha de cabeçalho)
+    var linhas = tabela.getElementsByTagName("tr");
 
-    // Extract company names from the table
-    var options = [];
-    for (var i = 1; i < rows.length; i++) {
-        var companyCell = rows[i].getElementsByTagName("td")[0];
-        options.push(companyCell.textContent.trim());
+    // Extrair nomes das empresas da tabela e preencher as opções do dropdown
+    var opcoes = [];
+    for (var i = 1; i < linhas.length; i++) {
+        var celulaEmpresa = linhas[i].getElementsByTagName("td")[0];
+        opcoes.push(celulaEmpresa.textContent.trim());
     }
 
-    // Create a select element
-    var select = document.createElement("select");
-
-    // Loop through the options and create option elements
-    for (var i = 0; i < options.length; i++) {
-        var option = document.createElement("option");
-        option.value = options[i];
-        option.text = options[i];
-        select.appendChild(option);
+    // Criar elementos de opção para o dropdown
+    for (var i = 0; i < opcoes.length; i++) {
+        var opcao = document.createElement("option");
+        opcao.value = opcoes[i];
+        opcao.text = opcoes[i];
+        dropdown.appendChild(opcao);
     }
 
-    // Append the select element to the body or any other container element
-    document.body.appendChild(select);
+    // Adicionar evento de mudança ao dropdown
+    dropdown.addEventListener("change", function() {
+        var valorSelecionado = this.value.toLowerCase();
+
+        // Loop através das linhas da tabela
+        for (var i = 1; i < linhas.length; i++) {
+            var celulaEmpresa = linhas[i].getElementsByTagName("td")[0];
+            var empresa = celulaEmpresa.textContent.trim().toLowerCase();
+
+            // Definir a visibilidade da linha com base na correspondência com a opção selecionada
+            linhas[i].style.display = (empresa === valorSelecionado || valorSelecionado === "") ? "" : "none";
+        }
+    });
+
+    // Anexar o dropdown ao corpo do documento ou a qualquer outro elemento contêiner
+    document.body.appendChild(dropdown);
 </script>
 
 </body>
