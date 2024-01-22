@@ -25,7 +25,7 @@
 <body>
 <h2>HTML Table</h2>
 
-<table>
+<table id="companyTable">
   <tr>
     <th>Company</th>
     <th>Contact</th>
@@ -64,8 +64,18 @@
 </table>
     
 <script>
-    // Sample data for the dropdown options
-    var options = ["Option 1", "Option 2", "Option 3", "Option 4"];
+    // Get the table element
+    var table = document.getElementById("companyTable");
+
+    // Get all the rows in the table (excluding the header row)
+    var rows = table.getElementsByTagName("tr");
+
+    // Extract company names from the table
+    var options = [];
+    for (var i = 1; i < rows.length; i++) {
+        var companyCell = rows[i].getElementsByTagName("td")[0];
+        options.push(companyCell.textContent.trim());
+    }
 
     // Create a select element
     var select = document.createElement("select");
