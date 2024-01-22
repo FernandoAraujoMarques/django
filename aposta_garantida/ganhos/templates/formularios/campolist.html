@@ -150,6 +150,46 @@
     </select>
 </div>
 
+<script>
+    // Obter o elemento da tabela e do dropdown
+    var tabela = document.getElementById("myTable1");
+    var dropdown = document.createElement("select");
 
+    // Obter todas as linhas da tabela (excluindo a linha de cabeçalho)
+    var linhas = tabela.getElementsByTagName("tr");
+
+    // Extrair nomes das empresas da tabela e preencher as opções do dropdown
+    var opcoes = [];
+    for (var i = 1; i < linhas.length; i++) {
+        var celulaData = linhas[i].getElementsByTagName("td")[0];
+        opcoes.push(celulaData.textContent.trim());
+    }
+
+    // Criar elementos de opção para o dropdown
+    for (var i = 0; i < opcoes.length; i++) {
+        var opcao = document.createElement("option");
+        opcao.value = opcoes[i];
+        opcao.text = opcoes[i];
+        dropdown.appendChild(opcao);
+    }
+
+    // Adicionar evento de mudança ao dropdown
+    dropdown.addEventListener("change", function() {
+        var valorSelecionado = this.value.toLowerCase();
+
+        // Loop através das linhas da tabela
+        for (var i = 1; i < linhas.length; i++) {
+            var celulaData = linhas[i].getElementsByTagName("td")[0];
+            var data = celulaData.textContent.trim().toLowerCase();
+
+            // Definir a visibilidade da linha com base na correspondência com a opção selecionada
+            linhas[i].style.display = (data === valorSelecionado || valorSelecionado === "") ? "" : "none";
+        }
+    });
+
+    // Anexar o dropdown ao corpo do documento ou a qualquer outro elemento contêiner
+    document.body.appendChild(dropdown);
+</script>
+        
 </body>
 </html>
