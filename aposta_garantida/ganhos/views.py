@@ -6,7 +6,11 @@ from django.views.generic.list import ListView
 from django.urls import reverse_lazy
 from datetime import date
 
-
+## Teste DropBox
+def dropbox(request):
+  template = loader.get_template('dropbox.html')
+  return HttpResponse(template.render())
+    
 ######### UPDATE VIEW ####
 class CampoUpdate(UpdateView):
     model = Member
