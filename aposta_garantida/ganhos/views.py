@@ -5,6 +5,7 @@ from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.views.generic.list import ListView
 from django.urls import reverse_lazy
 from datetime import date
+from django.template import loader
 
 ## Teste DropBox
 def dropbox(request):
