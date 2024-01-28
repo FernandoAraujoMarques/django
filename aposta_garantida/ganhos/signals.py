@@ -1,6 +1,6 @@
 from django.db.models.signals import post_save
 from django.dispatch import receiver
-from blank.models import Member, Saldo 
+from ganhos.models import Member, Saldo 
 import logging
 
 logger = logging.getLogger(__name__)
