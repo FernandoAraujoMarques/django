@@ -1,6 +1,6 @@
-from django.db.models.signals import post_save
+from django.db.models.signals import post_save, pre_delete
 from django.dispatch import receiver
-from ganhos.models import Member, Saldo 
+from ganhos.models import Member, Saldo
 import logging
 
 logger = logging.getLogger(__name__)
@@ -14,7 +14,9 @@ def novo_member_criado(sender, instance, created, **kwargs):
 def member_atualizado(sender, instance, **kwargs):
     if instance.status == 'ganhou':
         processar_aposta_ganha(instance)
-
+    elif instance.status == 'perdeu':
+        processar_aposta_perdida(instance)
+        
 def processar_nova_aposta(member_instance):
     casa = member_instance.casa
     valor_aposta = member_instance.valor
@@ -40,3 +42,26 @@ def processar_aposta_ganha(member_instance):
     saldo_casa_ganhadora.save()
 
     logger.info(f"Aposta ganha: {member_instance}. Saldo atualizado para a casa {casa_ganhadora}: {saldo_casa_ganhadora.valor}")
+    
+@receiver(pre_delete, sender=Member)
+def member_deletado(sender, instance, **kwargs):
+    if instance.status == 'ganhou':
+        processar_exclusao_aposta_ganha(instance)
+
+def processar_aposta_perdida(member_instance):
+    # Supondo que 'Member' seja o modelo que você deseja excluir
+    try:
+        member_associado = Member.objects.get(pk=member_instance.pk)
+        member_associado.delete()
+        logger.info(f"Entrada em 'Member' excluída para a aposta perdida: {member_instance}")
+    except Member.DoesNotExist:
+        logger.warning(f"Nenhuma entrada em 'Member' encontrada para a aposta perdida: {member_instance}")
+
+def processar_exclusao_aposta_ganha(member_instance):
+    # Supondo que 'Member' seja o modelo que você deseja excluir
+    try:
+        member_associado = Member.objects.get(pk=member_instance.pk)
+        member_associado.delete()
+        logger.info(f"Entrada em 'Member' excluída para a aposta ganha excluída: {member_instance}")
+    except Member.DoesNotExist:
+        logger.warning(f"Nenhuma entrada em 'Member' encontrada para a aposta ganha excluída: {member_instance}")
