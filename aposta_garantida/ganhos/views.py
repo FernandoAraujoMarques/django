@@ -10,7 +10,7 @@ from django.http import HttpResponse
 
 ## Black List
 def blacklist(request):
-  template = loader.get_template('ormularios/black_list.html')
+  template = loader.get_template('formularios/black_list.html')
   return HttpResponse(template.render())
   
 ## Teste DropBox
