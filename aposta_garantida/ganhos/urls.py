@@ -10,5 +10,6 @@ urlpatterns = [
     path('cadastrar/campo', CampoCreate.as_view(), name='cadastrar-campo'),
     path('saldo/', views.saldo, name='saldo'),
     path('lucros_day/', LucrosDayListView.as_view(), name='lucros_day'),
+    path('Black_List/', Black_ListView.as_view(), name='black_list'),
     path('dropbox/', views.dropbox, name='dropbox'),
 ]
