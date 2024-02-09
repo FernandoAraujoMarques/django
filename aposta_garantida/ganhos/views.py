@@ -8,6 +8,11 @@ from datetime import date
 from django.template import loader
 from django.http import HttpResponse
 
+## Black List
+def blacklist(request):
+  template = loader.get_template('ormularios/black_list.html')
+  return HttpResponse(template.render())
+  
 ## Teste DropBox
 def dropbox(request):
   template = loader.get_template('dropbox.html')
