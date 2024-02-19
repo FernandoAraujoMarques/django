@@ -8,10 +8,6 @@ from datetime import date
 from django.template import loader
 from django.http import HttpResponse
 
-#### Contas a Pagar ###
-def contas_pagar(request):
-    return render(request, 'formularios/contas.html')
-
 ## Black List
 def black_list(request):
     return render(request, 'formularios/black_list.html')
@@ -83,6 +79,15 @@ class CampoList(ListView):
         })
 
         return context
+
+#### Contas a Pagar ###
+def contas_pagar(request):
+    mydata = Contas.objects.all().values()
+    context = {
+        'mymembers': mydata,
+    }
+
+    return render(request, 'formularios/contas.html',context)
 
 #### SALDO ###
 def saldo(request):
