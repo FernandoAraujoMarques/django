@@ -11,6 +11,6 @@ urlpatterns = [
     path('saldo/', views.saldo, name='saldo'),
     path('lucros_day/', LucrosDayListView.as_view(), name='lucros_day'),
     path('black_list/', views.black_list, name='black_list'),
+    path('contas_pagar/', views.contas_pagar, name='contas_pagar'),
     path('dropbox/', views.dropbox, name='dropbox'),
-    path('contas/', views.contas, name='contas'),
 ]

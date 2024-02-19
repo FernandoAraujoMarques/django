@@ -9,7 +9,7 @@ from django.template import loader
 from django.http import HttpResponse
 
 #### Contas a Pagar ###
-def contas(request):
+def contas_pagar(request):
     return render(request, 'formularios/contas.html')
 
 ## Black List
