@@ -40,10 +40,12 @@
       <tr>
         <th>Valor_Total_aPagar</th>
         <th>Valor_Total_Recebido</th>
+        <th>Valor_Sobra</th>
       </tr>
       <tr>
         <td>{{ total_valor|default:"0.00" }}</td>
         <td>{{ total_valor_recebido|default:"0.00" }}</td>
+        <td>{{ total_valor_sobra|default:"0.00" }}</td>
       </tr>
     </table>
 </div>

@@ -85,10 +85,12 @@ def contas_pagar(request):
     mydata = Contas.objects.all().values()
     total_valor = Contas.objects.aggregate(total=Sum('valor'))['total']
     total_valor_recebido = Recebido.objects.aggregate(total=Sum('valor'))['total']
+    total_valor_sobra = total_valor_recebido - total_valor
     context = {
         'mymembers': mydata,
         'total_valor': total_valor,
         'total_valor_recebido': total_valor_recebido,
+        'total_valor_sobra': total_valor_sobra
     }
 
     return render(request, 'formularios/contas.html',context)
