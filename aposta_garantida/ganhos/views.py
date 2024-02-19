@@ -83,8 +83,10 @@ class CampoList(ListView):
 #### Contas a Pagar ###
 def contas_pagar(request):
     mydata = Contas.objects.all().values()
+    total_valor = Contas.objects.aggregate(total=Sum('valor'))['total']
     context = {
         'mymembers': mydata,
+        'total_valor': total_valor,
     }
 
     return render(request, 'formularios/contas.html',context)
