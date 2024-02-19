@@ -1,0 +1,61 @@
+
+<!DOCTYPE html>
+
+<html lang="en">
+<style>
+        #myTable {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 15px;
+        }
+
+        th, td {
+            padding: 8px;
+            text-align: left;
+            border: 1px solid #ddd;
+        }
+
+        th {
+            background-color: #f2f2f2;
+        }
+    </style>
+
+<head>
+    <meta charset="UTF-8">
+</head>
+
+<body>
+
+{% extends 'base.html' %}
+
+{% block content %}
+
+<h1> Contas a Pagar </h1>
+
+<div class=".betting-table" id="myTable">
+        <table class="table">
+          <tr>
+              <th> Data </th>
+              <th> Ref </th>
+              <th> Valor </th>
+          </tr>
+
+            {% for entry in contas %}
+            <tr>
+                <td>{{ entry.data }}</td>
+                <td>{{ entry.ref }}</td>
+                <td>{{ entry.valor }}</td>
+            </tr>
+            {% endfor %}
+        </table>
+</div>
+
+{% endblock %}
+
+</body>
+</html>

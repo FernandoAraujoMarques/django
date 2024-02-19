@@ -1,6 +1,6 @@
 from django.urls import path
 from . import views
-from .views import CampoUpdate, CampoList, CampoCreate, CampoDelete, LucrosDayListView, black_list
+from .views import CampoUpdate, CampoList, CampoCreate, CampoDelete, LucrosDayListView, black_list, Contas
 
 urlpatterns = [
     path('', CampoList.as_view(), name='listar-campo'),
@@ -12,4 +12,5 @@ urlpatterns = [
     path('lucros_day/', LucrosDayListView.as_view(), name='lucros_day'),
     path('black_list/', views.black_list, name='black_list'),
     path('dropbox/', views.dropbox, name='dropbox'),
+    path('contas/', views.contas, name='contas'),
 ]

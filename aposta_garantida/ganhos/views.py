@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-from .models import Member, Saldo, Aposta
+from .models import Member, Saldo, Aposta, Contas
 from django.db.models import F, Sum
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.views.generic.list import ListView
@@ -7,6 +7,16 @@ from django.urls import reverse_lazy
 from datetime import date
 from django.template import loader
 from django.http import HttpResponse
+
+#### Contas a Pagar ###
+def contas(request):
+    mydata = Contas.objects.all().values()
+
+    context = {
+        'contas': conta,
+    }
+
+    return render(request, 'formularios/contas.html')
 
 ## Black List
 def black_list(request):
