@@ -10,12 +10,6 @@ from django.http import HttpResponse
 
 #### Contas a Pagar ###
 def contas(request):
-    mydata = Contas.objects.all().values()
-
-    context = {
-        'contas': conta,
-    }
-
     return render(request, 'formularios/contas.html')
 
 ## Black List
