@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-from .models import Member, Saldo, Aposta, Contas
+from .models import Member, Saldo, Aposta, Contas, Recebido
 from django.db.models import F, Sum
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.views.generic.list import ListView
@@ -84,9 +84,11 @@ class CampoList(ListView):
 def contas_pagar(request):
     mydata = Contas.objects.all().values()
     total_valor = Contas.objects.aggregate(total=Sum('valor'))['total']
+    total_valor_recebido = Recebido.objects.aggregate(total=Sum('valor'))['total']
     context = {
         'mymembers': mydata,
         'total_valor': total_valor,
+        'total_valor_recebido': total_valor_recebido,
     }
 
     return render(request, 'formularios/contas.html',context)

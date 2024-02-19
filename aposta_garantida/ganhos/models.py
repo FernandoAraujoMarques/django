@@ -37,11 +37,6 @@ class Aposta(models.Model):
     # Outros campos do modelo
   ganho = models.DecimalField(max_digits=10, decimal_places=2, default=0.00)
 
-class Teste2(models.Model):
-  data = models.DateField()
-
-  def __str__(self):
-    return f"{self.data}"
 
 class Contas(models.Model):
   data = models.DateField()
@@ -49,6 +44,13 @@ class Contas(models.Model):
   valor = models.DecimalField(max_digits=10, decimal_places=2)
   status = models.CharField(max_length=20,choices=[('pago', 'Pago'), ('pendente', 'Pendente')])
 
+  def __str__(self):
+    return f"{self.data} {self.ref} {self.valor}"
+
+class Recebido(models.Model):
+  data = models.DateField()
+  ref = models.CharField(max_length=255)
+  valor = models.DecimalField(max_digits=10, decimal_places=2)
 
   def __str__(self):
     return f"{self.data} {self.ref} {self.valor}"
