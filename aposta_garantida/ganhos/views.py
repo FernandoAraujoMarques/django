@@ -127,20 +127,30 @@ class LucrosDayListView(ListView):
         return queryset
 
 #### Loto Facil ###
-def loto_facil(request):
-    if request.method == 'POST':
-        numeros_sorteados = list(map(int, request.POST.get('numeros_sorteados').split()))
-        apostas = [[int(numero) for numero in aposta.split()] for aposta in request.POST.get('apostas').split('\n')]
+#def loto_facil(request):
+ #   if request.method == 'POST':
+  #      numeros_sorteados = list(map(int, request.POST.get('numeros_sorteados').split()))
+   #     apostas = [[int(numero) for numero in aposta.split()] for aposta in request.POST.get('apostas').split('\n')]
 
-        resultados, total_acertos = conferir_lotofacil(apostas, numeros_sorteados)
+    #    resultados, total_acertos = conferir_lotofacil(apostas, numeros_sorteados)
         
-        resultado_obj = Resultado.objects.create(
-            numeros_sorteados=" ".join(map(str, numeros_sorteados)),
-            apostas="\n".join(" ".join(map(str, aposta)) for aposta in apostas),
-            total_acertos=total_acertos
-        )
+     #   resultado_obj = Resultado.objects.create(
+      #      numeros_sorteados=" ".join(map(str, numeros_sorteados)),
+       #     apostas="\n".join(" ".join(map(str, aposta)) for aposta in apostas),
+        #    total_acertos=total_acertos
+        #)
         
         context = {'resultados': resultados, 'total_acertos': total_acertos}
         return render(request, 'formularios/loto_facil.html', context)
     
     return render(request, 'formularios/loto_facil.html')
+
+
+#### Loto Facil ###
+def loto_facil((request):
+    mydata = LotoFacil.objects.all().values()
+    context = {
+        'mymembers': mydata,
+    }
+
+    return render(request, 'formularios/loto_facil.html',context)
