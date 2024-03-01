@@ -6,23 +6,34 @@
     <title>Conferência da Lotofácil</title>
 </head>
 <body>
-    <h1>Conferência da Lotofácil</h1>
-    <form method="post">
-        {% csrf_token %}
-        <label for="numeros_sorteados">Números sorteados:</label>
-        <input type="text" name="numeros_sorteados" id="numeros_sorteados"><br><br>
-        <label for="apostas">Apostas (um jogo por linha):</label>
-        <textarea name="apostas" id="apostas" rows="5"></textarea><br><br>
-        <button type="submit">Conferir</button>
-    </form>
-    {% if resultados %}
-        <h2>Resultados:</h2>
-        <ul>
-            {% for resultado in resultados %}
-                <li>{{ forloop.counter }}ª Aposta: {{ resultado }} números acertados</li>
+{% extends 'base.html' %}
+
+{% block content %}
+
+<h1> Loto Facil </h1>
+
+<div class=".betting-table" id="myTable">
+        <table class="table">
+          <tr>
+              <th> Data </th>
+              <th> Concurso <th>
+              <th> Valor </th>
+              <th> N_Sorteados </th>
+              <th> Q_Acertos</th>
+          </tr>
+
+            {% for entry in mymembers %}
+            <tr>
+                <td>{{ entry.data }}</td>
+                <td>{{ entry.concurso }}</td>
+                <td>{{ entry.valor }}</td>
+                <td>{{ entry.numeros_sorteados }}</td>
+                <td>{{ entry.total_acertos }}</td>
+            </tr>
             {% endfor %}
-        </ul>
-        <p>Total de números acertados: {{ total_acertos }}</p>
-    {% endif %}
+        </table>
+</div>
+
+{% endblock %}
 </body>
 </html>
