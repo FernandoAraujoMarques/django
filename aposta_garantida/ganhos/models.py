@@ -54,3 +54,13 @@ class Recebido(models.Model):
 
   def __str__(self):
     return f"{self.data} {self.ref} {self.valor}"
+
+from django.db import models
+
+class LotoFacil(models.Model):
+    numeros_sorteados = models.CharField(max_length=200)
+    apostas = models.TextField()
+    total_acertos = models.IntegerField()
+
+    def __str__(self):
+        return f"Resultado - Números sorteados: {self.numeros_sorteados}, Total de acertos: {self.total_acertos}"
