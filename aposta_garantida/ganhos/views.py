@@ -96,19 +96,6 @@ def contas_pagar(request):
     return render(request, 'formularios/contas.html',context)
 
 
-#### Loto Facil ###
-def loto_facil(request):
-    if request.method == 'POST':
-        numeros_sorteados = list(map(int, request.POST.get('numeros_sorteados').split()))
-        apostas = [[int(numero) for numero in aposta.split()] for aposta in request.POST.get('apostas').split('\n')]
-
-        resultados, total_acertos = conferir_lotofacil(apostas, numeros_sorteados)
-        context = {'resultados': resultados, 'total_acertos': total_acertos}
-        return render(request, 'formularios/loto_facil.html', context)
-    
-    return render(request, 'formularios/loto_facil.html')
-
-
 #### SALDO ###
 def saldo(request):
     mydata = Saldo.objects.all().values()
@@ -138,3 +125,22 @@ class LucrosDayListView(ListView):
         )
 
         return queryset
+
+#### Loto Facil ###
+def loto_facil(request):
+    if request.method == 'POST':
+        numeros_sorteados = list(map(int, request.POST.get('numeros_sorteados').split()))
+        apostas = [[int(numero) for numero in aposta.split()] for aposta in request.POST.get('apostas').split('\n')]
+
+        resultados, total_acertos = conferir_lotofacil(apostas, numeros_sorteados)
+        
+        resultado_obj = Resultado.objects.create(
+            numeros_sorteados=" ".join(map(str, numeros_sorteados)),
+            apostas="\n".join(" ".join(map(str, aposta)) for aposta in apostas),
+            total_acertos=total_acertos
+        )
+        
+        context = {'resultados': resultados, 'total_acertos': total_acertos}
+        return render(request, 'formularios/loto_facil.html', context)
+    
+    return render(request, 'formularios/loto_facil.html')
