@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Member, Saldo, Aposta, Contas, Recebido
+from .models import Member, Saldo, Aposta, Contas, Recebido, LotoFacil
 
 # Register your models here.
 admin.site.register(Member)
