@@ -128,7 +128,7 @@ class LucrosDayListView(ListView):
 
 
 #### Loto Facil ###
-def loto_facil((request):
+def loto_facil(request):
     mydata = LotoFacil.objects.all().values()
     context = {
         'mymembers': mydata,
