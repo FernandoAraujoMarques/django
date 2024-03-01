@@ -69,7 +69,6 @@ class LotoFacil(models.Model):
 class Teimosinha(models.Model):
     data = models.DateField(auto_now_add=True)
     numeros_aposta = models.CharField(max_length=200)
-    n_concurso = models.IntegerField()
     valor_bilhete= models.IntegerField()
     total_acertos = models.IntegerField()
     
