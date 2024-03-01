@@ -12,5 +12,6 @@ urlpatterns = [
     path('lucros_day/', LucrosDayListView.as_view(), name='lucros_day'),
     path('black_list/', views.black_list, name='black_list'),
     path('contas_pagar/', views.contas_pagar, name='contas_pagar'),
+    path('loto_facil/', views.loto_facil, name='loto_facil'),
     path('dropbox/', views.dropbox, name='dropbox'),
 ]
