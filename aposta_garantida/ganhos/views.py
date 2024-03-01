@@ -95,6 +95,15 @@ def contas_pagar(request):
 
     return render(request, 'formularios/contas.html',context)
 
+#### Loto Facil ###
+def loto_facil(request):
+    mydata = LotoFacil.objects.all().values()
+    context = {
+        'mymembers': mydata,
+    }
+
+    return render(request, 'formularios/contas.html',context)
+
 #### SALDO ###
 def saldo(request):
     mydata = Saldo.objects.all().values()
