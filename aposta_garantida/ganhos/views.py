@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-from .models import Member, Saldo, Aposta, Contas, Recebido
+from .models import Member, Saldo, Aposta, Contas, Recebido, LotoFacil
 from django.db.models import F, Sum
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.views.generic.list import ListView
@@ -95,14 +95,19 @@ def contas_pagar(request):
 
     return render(request, 'formularios/contas.html',context)
 
+
 #### Loto Facil ###
 def loto_facil(request):
-    mydata = LotoFacil.objects.all().values()
-    context = {
-        'mymembers': mydata,
-    }
+    if request.method == 'POST':
+        numeros_sorteados = list(map(int, request.POST.get('numeros_sorteados').split()))
+        apostas = [[int(numero) for numero in aposta.split()] for aposta in request.POST.get('apostas').split('\n')]
 
-    return render(request, 'formularios/contas.html',context)
+        resultados, total_acertos = conferir_lotofacil(apostas, numeros_sorteados)
+        context = {'resultados': resultados, 'total_acertos': total_acertos}
+        return render(request, 'formularios/loto_facil.html', context)
+    
+    return render(request, 'formularios/loto_facil.html')
+
 
 #### SALDO ###
 def saldo(request):
