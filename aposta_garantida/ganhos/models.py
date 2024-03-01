@@ -62,7 +62,7 @@ class LotoFacil(models.Model):
     numeros_sorteados = models.CharField(max_length=200)
     apostas = models.TextField()
     total_acertos = models.IntegerField()
-    concurso = models.IntegerField()
+    concurso = models.IntegerField(default=0)
     valor_bilhete= models.IntegerField()
 
     def __str__(self):
