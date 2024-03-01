@@ -69,9 +69,9 @@ class LotoFacil(models.Model):
 class Teimosinha(models.Model):
     data = models.DateField(auto_now_add=True)
     numeros_aposta = models.CharField(max_length=200)
-    concurso = models.IntegerField()
+    n_concurso = models.IntegerField()
     valor_bilhete= models.IntegerField()
     total_acertos = models.IntegerField()
     
     def __str__(self):
-        return f"{self.data} {self.numeros_aposta} {self.concurso} {self.valor_bilhete} {self.total_acertos}"
+        return f"{self.data} {self.numeros_aposta} {self.n_concurso} {self.valor_bilhete} {self.total_acertos}"
