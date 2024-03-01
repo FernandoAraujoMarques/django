@@ -140,10 +140,10 @@ class LucrosDayListView(ListView):
         #    total_acertos=total_acertos
         #)
         
-        context = {'resultados': resultados, 'total_acertos': total_acertos}
-        return render(request, 'formularios/loto_facil.html', context)
+        #context = {'resultados': resultados, 'total_acertos': total_acertos}
+        #return render(request, 'formularios/loto_facil.html', context)
     
-    return render(request, 'formularios/loto_facil.html')
+    #return render(request, 'formularios/loto_facil.html')
 
 
 #### Loto Facil ###
